@@ -1,0 +1,50 @@
+{
+  "name": "whisper-pwa-transcriber",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Next.js 15 PWA avec transcription Whisper offline utilisant WebGPU/CPU",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    "export": "next build && next export"
+  },
+  "dependencies": {
+    "@huggingface/transformers": "^3.0.2",
+    "next": "^15.0.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "onnxruntime-web": "^1.19.2",
+    "workbox-webpack-plugin": "^7.1.0",
+    "idb": "^8.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.4",
+    "@types/react": "^18.3.9",
+    "@types/react-dom": "^18.3.0",
+    "eslint": "^9.11.1",
+    "eslint-config-next": "^15.0.3",
+    "typescript": "^5.6.2",
+    "@typescript-eslint/eslint-plugin": "^8.7.0",
+    "@typescript-eslint/parser": "^8.7.0",
+    "tailwindcss": "^3.4.13",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "keywords": [
+    "nextjs",
+    "pwa",
+    "whisper",
+    "webgpu",
+    "typescript",
+    "offline",
+    "transcription",
+    "speech-to-text"
+  ]
+}
