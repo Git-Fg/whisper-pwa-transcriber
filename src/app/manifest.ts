@@ -1,5 +1,7 @@
 import type { MetadataRoute } from 'next'
 
+export const dynamic = 'force-static'
+
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'Whisper PWA Transcriber',
@@ -46,19 +48,19 @@ export default function manifest(): MetadataRoute.Manifest {
         src: '/icon-192x192.png',
         sizes: '192x192',
         type: 'image/png',
-        purpose: 'maskable any'
+        purpose: 'any'
       },
       {
         src: '/icon-384x384.png',
         sizes: '384x384',
         type: 'image/png',
-        purpose: 'maskable any'
+        purpose: 'any'
       },
       {
         src: '/icon-512x512.png',
         sizes: '512x512',
         type: 'image/png',
-        purpose: 'maskable any'
+        purpose: 'any'
       }
     ],
     
@@ -148,11 +150,6 @@ export default function manifest(): MetadataRoute.Manifest {
     },
     
     // Préférences d'installation
-    prefer_related_applications: false,
-    
-    // Configuration Edge Sidebar (Microsoft Edge)
-    edge_side_panel: {
-      preferred_width: 400
-    }
+    prefer_related_applications: false
   }
 }

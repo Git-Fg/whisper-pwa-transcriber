@@ -3,11 +3,11 @@ import type {
   WhisperConfig,
   TranscriptionResult,
   TranscriptionProgress,
-  TranscriptionError,
   AudioBuffer,
   HardwareCapabilities,
   WhisperModelSize
 } from '@/types/whisper';
+import { TranscriptionError } from '@/types/whisper';
 import { HardwareDetector } from './hardware-detection';
 
 /**
@@ -18,7 +18,7 @@ export class WhisperTranscriber {
   private config: WhisperConfig | null = null;
   private capabilities: HardwareCapabilities | null = null;
   private isInitialized: boolean = false;
-  private progressCallback?: (progress: TranscriptionProgress) => void;
+  private progressCallback: ((progress: TranscriptionProgress) => void) | undefined;
 
   /**
    * Mappings des modèles Whisper optimisés pour le navigateur
@@ -132,7 +132,9 @@ export class WhisperTranscriber {
         };
       }
 
-      this.pipeline = await pipeline(
+      // Create the pipeline with explicit typing
+      const createPipeline = pipeline as any;
+      this.pipeline = await createPipeline(
         'automatic-speech-recognition',
         modelId,
         pipelineOptions
