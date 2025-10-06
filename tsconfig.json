@@ -1,6 +1,11 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "es6", "webworker"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "es6",
+      "webworker"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -19,27 +24,45 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@/components/*": ["./src/components/*"],
-      "@/lib/*": ["./src/lib/*"],
-      "@/types/*": ["./src/types/*"],
-      "@/hooks/*": ["./src/hooks/*"],
-      "@/utils/*": ["./src/utils/*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "@/components/*": [
+        "./src/components/*"
+      ],
+      "@/lib/*": [
+        "./src/lib/*"
+      ],
+      "@/types/*": [
+        "./src/types/*"
+      ],
+      "@/hooks/*": [
+        "./src/hooks/*"
+      ],
+      "@/utils/*": [
+        "./src/utils/*"
+      ]
     },
     "target": "ES2022",
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true
+    "exactOptionalPropertyTypes": true,
+    "types": ["jest", "node", "@testing-library/jest-dom"]
   },
   "include": [
-    "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
+    "next-env.d.ts",
+    "public/sw.js",
     "src/**/*",
-    "public/sw.js"
+    "out/types/**/*.ts"
   ],
-  "exclude": ["node_modules", ".next", "out"]
+  "exclude": [
+    "node_modules",
+    ".next",
+    "out"
+  ]
 }

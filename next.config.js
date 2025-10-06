@@ -1,9 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    esmExternals: 'loose',
-    serverComponentsExternalPackages: ['@huggingface/transformers'],
-  },
   // Configuration PWA native Next.js 15
   output: 'export',
   trailingSlash: true,
@@ -12,17 +8,12 @@ const nextConfig = {
   
   // Support WebAssembly pour Transformers.js
   webpack: (config, { isServer }) => {
-    // Configuration WebAssembly
+    // Configuration WebAssembly plus simple
     config.experiments = {
+      ...config.experiments,
       asyncWebAssembly: true,
-      layers: true,
+      topLevelAwait: true,
     };
-    
-    // Support des fichiers .wasm
-    config.module.rules.push({
-      test: /\.wasm$/,
-      type: 'webassembly/async',
-    });
     
     // Configuration pour les Web Workers
     if (!isServer) {
@@ -31,33 +22,19 @@ const nextConfig = {
         fs: false,
         path: false,
         crypto: false,
+        stream: false,
+        buffer: false,
       };
+      
+      // Ignore node-specific modules
+      config.externals = config.externals || [];
+      config.externals.push({
+        'sharp': 'sharp',
+        'onnxruntime-node': 'onnxruntime-node',
+      });
     }
     
     return config;
-  },
-  
-  // Headers pour Cross-Origin Isolation (requis pour WebGPU)
-  async headers() {
-    return [
-      {
-        source: '/(.*)',
-        headers: [
-          {
-            key: 'Cross-Origin-Embedder-Policy',
-            value: 'require-corp'
-          },
-          {
-            key: 'Cross-Origin-Opener-Policy',
-            value: 'same-origin'
-          },
-          {
-            key: 'Cross-Origin-Resource-Policy',
-            value: 'cross-origin'
-          }
-        ],
-      },
-    ];
   },
   
   // Configuration des images

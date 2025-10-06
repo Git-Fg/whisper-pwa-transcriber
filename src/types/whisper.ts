@@ -66,9 +66,25 @@ export interface TranscriptionProgress {
   estimated_time_remaining?: number;
 }
 
-export interface TranscriptionError extends Error {
-  code: 'WEBGPU_NOT_SUPPORTED' | 'MODEL_LOAD_FAILED' | 'AUDIO_PROCESSING_FAILED' | 'MEMORY_INSUFFICIENT';
-  details?: Record<string, any>;
+export class TranscriptionError extends Error {
+  public readonly code: 'WEBGPU_NOT_SUPPORTED' | 'MODEL_LOAD_FAILED' | 'AUDIO_PROCESSING_FAILED' | 'MEMORY_INSUFFICIENT';
+  public readonly details: Record<string, any> | undefined;
+
+  constructor(
+    message: string, 
+    options: { 
+      code: 'WEBGPU_NOT_SUPPORTED' | 'MODEL_LOAD_FAILED' | 'AUDIO_PROCESSING_FAILED' | 'MEMORY_INSUFFICIENT';
+      details?: Record<string, any>;
+    }
+  ) {
+    super(message);
+    this.name = 'TranscriptionError';
+    this.code = options.code;
+    this.details = options.details;
+    
+    // Ensures proper prototype chain for instanceof checks
+    Object.setPrototypeOf(this, TranscriptionError.prototype);
+  }
 }
 
 export interface AudioBuffer {
